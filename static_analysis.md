@@ -1,7 +1,7 @@
 # Análisis Estático Defensivo - Team 02
 
 ## 1. Información General y Secciones PE
-[cite_start]Como parte del análisis estático, procedimos a revisar los timestamps y las secciones PE del binario[cite: 56.
+Como parte del análisis estático, procedimos a revisar los timestamps y las secciones PE del binario.
 * **Nombre del archivo:** `team_payload.exe`
 * **Arquitectura:** x64 (compilado con G++ / MinGW)
 * **Análisis de Secciones:** Al revisar el mapa de memoria en Ghidra, identificamos las secciones estándar de un ejecutable no empaquetado:
@@ -9,8 +9,9 @@
     * `.rdata`: Contiene datos de solo lectura (como nuestras cadenas visibles).
     * `.data` / `.bss`: Variables globales e inicializadas.
 * **Conclusión PE:** No se detectaron secciones anómalas (como `.upx`), lo que indica que el binario no hace uso de packers para ocultar su código fuente.
+<img width="905" height="355" alt="imagen" src="https://github.com/user-attachments/assets/8746c1ba-6b46-4dc1-9e29-0983ff964388" />
 
-**[INSERTAR CAPTURA 4: VENTANA "MEMORY MAP" DE GHIDRA AQUÍ]**
+<img width="903" height="359" alt="imagen" src="https://github.com/user-attachments/assets/5bba1641-7001-4f01-88e8-64e702eb57bc" />
 
 ---
 
