@@ -1,0 +1,50 @@
+# Análisis Estático Defensivo - Team 02
+
+## 1. Información General y Secciones PE
+[cite_start]Como parte del análisis estático, procedimos a revisar los timestamps y las secciones PE del binario[cite: 56.
+* **Nombre del archivo:** `team_payload.exe`
+* **Arquitectura:** x64 (compilado con G++ / MinGW)
+* **Análisis de Secciones:** Al revisar el mapa de memoria en Ghidra, identificamos las secciones estándar de un ejecutable no empaquetado:
+    * `.text`: Contiene el código ejecutable.
+    * `.rdata`: Contiene datos de solo lectura (como nuestras cadenas visibles).
+    * `.data` / `.bss`: Variables globales e inicializadas.
+* **Conclusión PE:** No se detectaron secciones anómalas (como `.upx`), lo que indica que el binario no hace uso de packers para ocultar su código fuente.
+
+**[INSERTAR CAPTURA 4: VENTANA "MEMORY MAP" DE GHIDRA AQUÍ]**
+
+---
+
+## 2. Extracción de Cadenas (Strings)
+[cite_start]Durante la inspección del binario, logramos extraer cadenas estáticas e identificar cadenas cifradas[cite: 52, 53].
+
+* **Cadenas estáticas relevantes descubiertas:**
+    * Se identificó un comando de sistema para ejecución oculta: `powershell.exe -WindowStyle Hidden -EncodedCommand YwBhAGwAYwAuAGUAeABlAA==`
+    * Se identificó una URL sospechosa apuntando a un servidor local, indicio de un posible C2: `http://127.0.0.1:8080/ping`
+
+**[INSERTAR CAPTURA 1: TEXTO POWERSHELL Y XREF EN GHIDRA AQUÍ]**
+
+* **Cadenas cifradas / Ofuscación:**
+    * A pesar de que el código ejecuta una rutina de impresión, la palabra objetivo ("Malware") no se encuentra presente en la lista de *Defined Strings* extraídas estáticamente. Esto confirma la presencia de una técnica de ofuscación de cadenas (XOR) en tiempo de ejecución.
+
+---
+
+## 3. Tabla de Importaciones (IAT) y APIs Sensibles
+[cite_start]Al revisar las import tables (IAT), logramos detectar APIs sensibles que revelan las capacidades potenciales del binario[cite: 54, 55].
+
+* **Librería `KERNEL32.DLL`:**
+    * **API Detectada:** `WinExec`
+    * **Impacto:** Esta es una API altamente sensible que permite la ejecución de procesos externos. Las referencias cruzadas (XREF) en Ghidra confirman que es utilizada por la función `ejecutarFilelessPayload`.
+
+**[INSERTAR CAPTURA 2: WINEXEC Y XREF EN GHIDRA AQUÍ]**
+
+* **Librería `WININET.DLL`:**
+    * **APIs Detectadas:** `InternetOpenA` e `InternetOpenUrlA`
+    * **Impacto:** Indican fuertemente capacidades de red (Beaconing/Stager). Las referencias cruzadas apuntan a la función `ejecutarStager`.
+
+**[INSERTAR CAPTURA 3: INTERNETOPENURLA Y XREF EN GHIDRA AQUÍ]**
+
+---
+
+## 4. Estructuras o Patrones Sospechosos
+[cite_start]Al cruzar los datos obtenidos, pudimos identificar estructuras o patrones sospechosos[cite: 57].
+* **Patrón de ataque Fileless:** La cadena de PowerShell detectada hace uso del parámetro `-EncodedCommand` seguido de una cadena que termina con el relleno clásico de Base64 (`==`). Al decodificar `YwBhAGwAYwAuAGUAeABlAA==` (en formato UTF-16LE, requerido por PowerShell), se revela la instrucción `calc.exe`. Este es un patrón clásico para evadir la detección de comandos maliciosos por línea de comandos.
