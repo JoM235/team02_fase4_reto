@@ -18,7 +18,7 @@ El binario implementa una rutina de descifrado de cadenas en tiempo de ejecució
 * Al ejecutar el binario paso a paso en x64dbg e interceptar el flujo en el primer breakpoint de red (`InternetOpenA`), se inspeccionó el estado de la pila (**Stack**).
 * Se detectó que la rutina de descifrado ya se había ejecutado de manera secuencial en memoria, revelando en texto plano la cadena `"Malware"` alojada en la dirección del puntero relativo `[rsp+50]`. Esto demuestra con éxito la efectividad de la técnica para evadir firmas estáticas simples y su posterior exposición inevitable en memoria dinámica.
 
-**[INSERTAR AQUÍ: Captura de pantalla 1 - Intercepción en InternetOpenA donde se aprecia [rsp+50]: "Malware" en los comentarios/pila]**
+<img width="1917" height="934" alt="imagen" src="https://github.com/user-attachments/assets/70058aa9-1295-4a72-bf48-27a9e8f39829" />
 
 ---
 
@@ -40,7 +40,7 @@ El binario simula un mecanismo de persistencia/comunicación ofensiva mediante u
 * La instrumentación de registros permitió auditar el contexto del procesador en el momento preciso del llamado: el registro de propósito general **RDX** actuaba como contenedor del puntero de memoria hacia la cadena de caracteres `"http://127.0.0.1:8080/ping"`.
 * Este comportamiento confirma un patrón clásico de *Beaconing* simulado, diseñado para consultar periódicamente un servidor C2 local en busca de instrucciones o payloads secundarios.
 
-**[INSERTAR AQUÍ: Captura de pantalla 2 - Detención en InternetOpenUrlA mostrando el registro RDX apuntando a la URL local]**
+<img width="1917" height="933" alt="imagen" src="https://github.com/user-attachments/assets/29b5159d-f17a-433a-86c3-4a077ec84938" />
 
 ---
 
@@ -54,4 +54,5 @@ La última etapa del binario ofensivo-educativo ejecuta un payload de tipo *File
 * **Análisis de evasión:** El uso del flag `-WindowStyle Hidden` indica un intento deliberado de ocultar la ventana de la consola al usuario final. El uso del parámetro `-EncodedCommand` seguido de un string codificado en Base64 con relleno estándar (`==`) representa un patrón clásico de evasión de defensas perimetrales e inspección de línea de comandos. 
 * **Decodificación del Payload:** Al realizar la ingeniería inversa de la cadena Base64 en formato UTF-16LE, se traduce directamente al comando ejecutable benigno `calc.exe`. Esto confirma que el binario simula con precisión una técnica de ejecución fileless sin poner en riesgo la integridad de la máquina host o el entorno de análisis.
 
-**[INSERTAR AQUÍ: Captura de pantalla 3 - Intercepción en la función WinExec con el registro RCX conteniendo el payload fileless de PowerShell]**
+<img width="1917" height="933" alt="imagen" src="https://github.com/user-attachments/assets/9d7695b8-3974-43cf-8527-fd3d52cf3943" />
+
