@@ -1,8 +1,15 @@
 
 **Universidad Autónoma de Nuevo León (UANL)**
+
 **Facultad de Ciencias Físico Matemáticas (FCFM)**
+
 **Proyecto:** PAC Fase 4 - Análisis y Detección de Técnicas Ofensivas en un Binario
-**Equipo 02:** Jonathan, Jose, Brandon, Carlos
+
+**Equipo 02:** 
+- Jonathan Emir Jacobo Martinez
+- Jose
+- Brandon Yahir Flores Garcia
+- Juan Carlos Fernandez Flores
 
 ---
 
