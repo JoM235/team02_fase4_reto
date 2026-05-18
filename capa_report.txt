@@ -1,0 +1,42 @@
+┌─────────────┬────────────────────────────────────────────────────────────────────────────────────┐
+│ md5         │ 60c7f8d7936fa8bb99a3b546bc476720                                                   │
+│ sha1        │ 4f3a80b55df793045922a543dbb6dcab25ae35b4                                           │
+│ sha256      │ 96c402081013f357f64bbcf6373659ad847f658edf9ea632432874235cf8d184                   │
+│ analysis    │ static                                                                             │
+│ os          │ windows                                                                            │
+│ format      │ pe                                                                                 │
+│ arch        │ amd64                                                                              │
+│ path        │ C:/Users/test-/Documents/PAC/E42/team_payload.exe                                  │
+└─────────────┴────────────────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────┬──────────────────────────────────────────────────┐
+│ ATT&CK Tactic                                 │ ATT&CK Technique                                 │
+├───────────────────────────────────────────────┼──────────────────────────────────────────────────┤
+│ EXECUTION                                     │ Shared Modules [T1129]                           │
+└───────────────────────────────────────────────┴──────────────────────────────────────────────────┘
+┌──────────────────────────────┬───────────────────────────────────────────────────────────────────┐
+│ MBC Objective                │ MBC Behavior                                                      │
+├──────────────────────────────┼───────────────────────────────────────────────────────────────────┤
+│ COMMUNICATION                │ HTTP Communication [C0002]                                        │
+│                              │ HTTP Communication::Create Request [C0002.012]                    │
+│                              │ HTTP Communication::Open URL [C0002.004]                          │
+│ DISCOVERY                    │ Code Discovery::Enumerate PE Sections [B0046.001]                 │
+│ MEMORY                       │ Allocate Memory [C0007]                                           │
+│ PROCESS                      │ Create Process [C0017]                                            │
+│                              │ Terminate Process [C0018]                                         │
+└──────────────────────────────┴───────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────┬──────────────────────────────────────────┐
+│ Capability                                            │ Namespace                                │
+├───────────────────────────────────────────────────────┼──────────────────────────────────────────┤
+│ reference HTTP User-Agent string                      │ communication/http                       │
+│ connect to URL                                        │ communication/http/client                │
+│ create HTTP request                                   │ communication/http/client                │
+│ contain a thread local storage (.tls) section         │ executable/pe/section/tls                │
+│ get thread local storage value                        │ host-interaction/process                 │
+│ create process on Windows                             │ host-interaction/process/create          │
+│ execute command                                       │ host-interaction/process/create          │
+│ allocate or change RWX memory (2 matches)             │ host-interaction/process/inject          │
+│ terminate process                                     │ host-interaction/process/terminate       │
+│ enumerate PE sections (4 matches)                     │ load-code/pe                             │
+│ parse PE header (9 matches)                           │ load-code/pe                             │
+└───────────────────────────────────────────────────────┴──────────────────────────────────────────┘
+
