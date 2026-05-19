@@ -7,7 +7,7 @@
 
 **Equipo 02:** 
 - Jonathan Emir Jacobo Martinez
-- Jose
+- Jose Miguel Castellanos Martinez
 - Brandon Yahir Flores Garcia
 - Juan Carlos Fernandez Flores
 
