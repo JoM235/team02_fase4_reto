@@ -3,10 +3,10 @@
 **Universidad Autónoma de Nuevo León (UANL)** **Facultad de Ciencias Físico Matemáticas (FCFM)** Este repositorio contiene los entregables correspondientes a la Fase 4 del reto académico de ciberseguridad. El objetivo de este proyecto es demostrar la comprensión práctica de las técnicas ofensivas mediante el desarrollo de un simulador de malware benigno, seguido de un análisis defensivo completo (estático, dinámico, de red y creación de reglas de detección).
 
 ## Equipo 02
-* Jonathan Emir Jacobo Martinez
-* Jose Miguel Castellanos Martinez
-* Brandon Yahir Flores Garcia
-* Juan Carlos Fernandez Flores
+* Jonathan Emir Jacobo Martinez.
+* Jose Miguel Castellanos Martinez.
+* Brandon Yahir Flores Garcia.
+* Juan Carlos Fernandez Flores.
 
 ---
 
